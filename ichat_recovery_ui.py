@@ -8,7 +8,7 @@ This script requires the 'nska-deserialize' library to parse the binary
 plist format used by iChat files.
 
 Usage:
-    python ichat_parser.py
+    python ichat_recovery_ui.py
 """
 
 import os
