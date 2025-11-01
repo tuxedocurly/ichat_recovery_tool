@@ -282,7 +282,7 @@ class ChatConverterApp:
         main_frame = ttk.Frame(self.root, padding="10")
         main_frame.pack(fill="both", expand=True)
 
-        # --- 1. Source Folder Selection ---
+        # --- Source Folder Selection ---
         source_frame = ttk.LabelFrame(main_frame, text=" 1. Select iChat Files Folder ", padding="10")
         source_frame.pack(fill="x", pady=5)
 
@@ -292,7 +292,7 @@ class ChatConverterApp:
         source_button = ttk.Button(source_frame, text="Browse...", command=self.select_source_dir)
         source_button.pack(side="left")
 
-        # --- 2. Destination Folder Selection ---
+        # --- Destination Folder Selection ---
         dest_frame = ttk.LabelFrame(main_frame, text=" 2. Select Output HTML Folder ", padding="10")
         dest_frame.pack(fill="x", pady=5)
 
@@ -302,7 +302,7 @@ class ChatConverterApp:
         dest_button = ttk.Button(dest_frame, text="Browse...", command=self.select_dest_dir)
         dest_button.pack(side="left")
 
-        # --- 3. Action Buttons ---
+        # --- Action Buttons ---
         button_frame = ttk.Frame(main_frame)
         button_frame.pack(pady=10)
 
@@ -323,7 +323,7 @@ class ChatConverterApp:
         self.progress_bar.pack(fill="x", expand=True)
 
 
-        # --- 4. Log/Status Window ---
+        # --- Log/Status Window ---
         log_frame = ttk.LabelFrame(main_frame, text=" Log ", padding="10")
         log_frame.pack(fill="both", expand=True)
 
@@ -366,7 +366,7 @@ class ChatConverterApp:
             return
 
         try:
-            # Cross-platform way to open a folder
+            # Cross-platform open folder
             if sys.platform == "win32":
                 os.startfile(output_dir)
             elif sys.platform == "darwin":  # macOS
