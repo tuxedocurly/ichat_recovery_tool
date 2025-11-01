@@ -11,6 +11,13 @@ A simple cross-platform Python application with a graphical user interface to pa
 * **Self-Contained Output:** Creates clean, self-contained HTML files that require no external dependencies to view in any modern web browser.  
 * **Cross-Platform:** Runs on Windows, macOS, and Linux.
 
+## **Known Issues**
+
+If you encounter an problem not on this list, please file an [Issue](https://github.com/tuxedocurly/ichat_recovery_tool/issues/new).
+
+* **Windows Defender Warning:** When running the pre-compiled binary, the windows defender screen may appear as the binary is not signed. To bypass this: In the Windows Defender popup, click "More Info" then "Run Anyway"
+* **Re-Running the Tool With the Same Input & Output Produces Duplicate .html message entries:** If you run the tool on the same input folder/data AND use the same output folder, your .html files will contain duplicate message entries. Just something to be aware of. I'll improve this eventually.
+
 ## **Requirements**
 
 * **Python 3.6+ (3.8 recommended)**: This version is required by nska-deserialize.
