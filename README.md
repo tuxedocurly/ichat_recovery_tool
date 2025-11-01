@@ -17,6 +17,7 @@ If you encounter an problem not on this list, please file an [Issue](https://git
 
 * **Windows Defender Warning:** When running the pre-compiled binary, the windows defender screen may appear as the binary is not signed. To bypass this: In the Windows Defender popup, click "More Info" then "Run Anyway"
 * **Re-Running the Tool With the Same Input & Output Produces Duplicate .html message entries:** If you run the tool on the same input folder/data AND use the same output folder, your .html files will contain duplicate message entries. Just something to be aware of. I'll improve this eventually.
+* **Folder "Browse" Buttons Not Visible On App Open On MacOS:** If you don't see the "Browse" button to select input and output folders on MacOS after running the app, resize the window until the buttons appear.
 
 ## **Requirements**
 
