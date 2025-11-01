@@ -36,12 +36,10 @@ except ImportError:
     )
     exit(1)
 
-# --- Configuration ---
-# This is now a default, can be changed in the UI
 DEFAULT_OUTPUT_DIR = "html_chats"
 
 # Regex to parse "username on YYYY-MM-DD at HH.MM.ichat"
-# Captures the username as group 1.
+# Captures the username as group 1
 FILENAME_REGEX = re.compile(r'^(.*?) on \d{4}-\d{2}-\d{2} at \d{2}\.\d{2}\.ichat$')
 
 # Define "magic bytes" (file signatures) to identify embedded image types.
@@ -119,13 +117,13 @@ def extract_messages_from_file(file_path, logger_func):
     logger_func(f"  -> Reading {os.path.basename(file_path)}")
     try:
         with open(file_path, "rb") as fp:
-            # Use nska-deserialize to parse the binary plist.
+            # Use nska-deserialize to parse the binary plist
             objects = deserialize_plist(fp)
     except Exception as e:
         logger_func(f"    -> Error deserializing file: {e}")
         return []
 
-    # The message list is nested deep within the deserialized object.
+    # The message list is nested deep within the deserialized object
     try:
         messages = objects[1][2]
         if not isinstance(messages, list):
@@ -203,7 +201,7 @@ def write_html_file(username, sorted_messages, output_dir, logger_func):
                 content_obj = msg.get('MessageText')
                 if content_obj:
                     # Get the text string
-                    # \ufffc is a placeholder for an attachment; remove it.
+                    # \ufffc is a placeholder for an attachment; remove it
                     text = content_obj.get('NSString', '').replace('\ufffc', '')
                     if text.strip():
                         f.write(f'<p>{html.escape(text)}</p>')
@@ -258,7 +256,6 @@ class ChatConverterApp:
         self.root.geometry("600x550") # Increased height for progress bar
         self.root.minsize(500, 450)
 
-        # --- Style Configuration ---
         # Configure a custom style for the green progress bar
         style = ttk.Style(self.root)
         style.layout('green.Horizontal.TProgressbar',
@@ -272,7 +269,6 @@ class ChatConverterApp:
         self.source_dir = tk.StringVar()
         self.dest_dir = tk.StringVar(value=DEFAULT_OUTPUT_DIR)
 
-        # --- Create Widgets ---
         self.create_widgets()
 
     def create_widgets(self):
@@ -282,7 +278,7 @@ class ChatConverterApp:
         main_frame = ttk.Frame(self.root, padding="10")
         main_frame.pack(fill="both", expand=True)
 
-        # --- Source Folder Selection ---
+        # Source folder selection
         source_frame = ttk.LabelFrame(main_frame, text=" 1. Select iChat Files Folder ", padding="10")
         source_frame.pack(fill="x", pady=5)
 
@@ -292,7 +288,7 @@ class ChatConverterApp:
         source_button = ttk.Button(source_frame, text="Browse...", command=self.select_source_dir)
         source_button.pack(side="left")
 
-        # --- Destination Folder Selection ---
+        # Destination folder selection
         dest_frame = ttk.LabelFrame(main_frame, text=" 2. Select Output HTML Folder ", padding="10")
         dest_frame.pack(fill="x", pady=5)
 
@@ -302,7 +298,7 @@ class ChatConverterApp:
         dest_button = ttk.Button(dest_frame, text="Browse...", command=self.select_dest_dir)
         dest_button.pack(side="left")
 
-        # --- Action Buttons ---
+        # Action buttons
         button_frame = ttk.Frame(main_frame)
         button_frame.pack(pady=10)
 
@@ -312,7 +308,7 @@ class ChatConverterApp:
         self.open_output_button = ttk.Button(button_frame, text="Open Output Folder", command=self.open_output_folder, state="disabled")
         self.open_output_button.pack(side="left", padx=5)
 
-        # --- Progress Bar ---
+        # Progress bar
         progress_frame = ttk.Frame(main_frame)
         progress_frame.pack(fill="x", pady=5, padx=5)
 
@@ -323,7 +319,7 @@ class ChatConverterApp:
         self.progress_bar.pack(fill="x", expand=True)
 
 
-        # --- Log/Status Window ---
+        # Log window
         log_frame = ttk.LabelFrame(main_frame, text=" Log ", padding="10")
         log_frame.pack(fill="both", expand=True)
 
@@ -354,9 +350,11 @@ class ChatConverterApp:
         """Appends a message to the log window."""
         self.log_text.config(state="normal")
         self.log_text.insert(tk.END, message + "\n")
-        self.log_text.see(tk.END)  # Auto-scroll to the bottom
+        # Auto-scroll to the bottom
+        self.log_text.see(tk.END)
         self.log_text.config(state="disabled")
-        self.root.update_idletasks()  # Force GUI update
+        # Force GUI update
+        self.root.update_idletasks()
 
     def open_output_folder(self):
         """Opens the selected output directory in the file explorer."""
@@ -366,8 +364,8 @@ class ChatConverterApp:
             return
 
         try:
-            # Cross-platform open folder
-            if sys.platform == "win32":
+            # Open folder
+            if sys.platform == "win32": # Windows
                 os.startfile(output_dir)
             elif sys.platform == "darwin":  # macOS
                 subprocess.Popen(["open", output_dir])
@@ -381,8 +379,10 @@ class ChatConverterApp:
         """
         The main logic loop, triggered by the 'Start' button.
         """
-        self.start_button.config(state="disabled")  # Prevent re-clicks
-        self.open_output_button.config(state="disabled") # Disable during processing
+        # Prevent re-clicks
+        self.start_button.config(state="disabled")
+        # Disable during processing
+        self.open_output_button.config(state="disabled")
         self.log_message("\n--- Starting Conversion Process ---")
 
         # Reset progress bar
@@ -403,7 +403,7 @@ class ChatConverterApp:
             os.makedirs(output_dir, exist_ok=True)
             self.log_message(f"HTML files will be saved to: {os.path.abspath(output_dir)}")
 
-            # --- Find and group all .ichat files by user ---
+            # Find and group all .ichat files by user
             search_path = os.path.join(source_directory, '*.ichat')
             ichat_files = glob.glob(search_path)
 
@@ -431,7 +431,7 @@ class ChatConverterApp:
                 else:
                     self.log_message(f"Warning: Skipping file with unexpected name format: {filename}")
 
-            # --- Process each user ---
+            # Process each user
             self.log_message(f"\nFound {len(user_files)} unique users. Starting processing...")
 
             total_users = len(user_files)
@@ -453,7 +453,7 @@ class ChatConverterApp:
 
                 if not all_messages_for_user:
                     self.log_message(f"  -> No messages found for {username}. Skipping.")
-                    processed_count += 1 # Still count as processed for progress bar
+                    processed_count += 1
                     continue
 
                 # Sort the consolidated list by timestamp
@@ -483,14 +483,15 @@ class ChatConverterApp:
             self.log_message(traceback.format_exc())
 
         finally:
-            self.start_button.config(state="normal")  # Re-enable button
+            # Re-enable button
+            self.start_button.config(state="normal")
             # Enable the open folder button if the output dir exists
             if os.path.isdir(self.dest_dir.get()):
                 self.open_output_button.config(state="normal")
 
 
 if __name__ == "__main__":
-    # Set up and run the Tkinter application
+    # Set up and run the app
     root = tk.Tk()
     app = ChatConverterApp(root)
     root.mainloop()
