@@ -20,7 +20,7 @@ A simple cross-platform Python application with a graphical user interface to pa
 
 If you just want to use the tool directly, this option is for you.
 
-1. Download the executable for your operating system, locaed in the releases folder.
+1. Download the executable for your operating system, locaed in the [release](https://github.com/tuxedocurly/ichat_recovery_tool/tree/main/release) folder.
 2. Run it!
 
 ## **Installation & Usage (Running from Source)**
