@@ -1,5 +1,5 @@
 """
-ichat_conversation_recovery.py
+ichat_recovery_ui.py
 
 A script with a graphical user interface (GUI) to parse Apple iChat (.ichat)
 files, extract messages and images, and render them as self-contained HTML files.
