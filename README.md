@@ -21,7 +21,7 @@ If you encounter an problem not on this list, please file an [Issue](https://git
 ## **Requirements**
 
 * **Python 3.6+ (3.8 recommended)**: This version is required by nska-deserialize.
-* **nska-deserialize**: A Python library for deserializing NSKeyedArchiver-encoded plists.
+* **[nska-deserialize](https://github.com/ydkhatri/nska_deserialize)**: A Python library for deserializing NSKeyedArchiver-encoded plists.
 
 ## **Installation & Usage (Run via Pre-Built Executable)**
 
@@ -70,4 +70,4 @@ If you wish to bundle this application into a standalone executable (.exe, .app,
 
 ## **Acknowledgements**
 
-This script utilizes nska-deserialize, which is released under the MIT license. This project, itself, is also released under the MIT license. Weeeeeeeeeeee!
+This script utilizes [nska-deserialize](https://github.com/ydkhatri/nska_deserialize), which is released under the MIT license. This project is also released under the MIT license. Weeeeeeeeeeee!
