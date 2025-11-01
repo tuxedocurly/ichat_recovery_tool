@@ -16,6 +16,7 @@ A simple cross-platform Python application with a graphical user interface to pa
 If you encounter an problem not on this list, please file an [Issue](https://github.com/tuxedocurly/ichat_recovery_tool/issues/new).
 
 * **Windows Defender Warning:** When running the pre-compiled binary, the windows defender screen may appear as the binary is not signed. To bypass this: In the Windows Defender popup, click "More Info" then "Run Anyway"
+* **MacOS Refuses to Open Pre-Compiled App:** Open a terminal window, and enter the following command: ```xattr -d com.apple.quarantine /path/to/your/ichat_recovery_ui_MACOS.app```
 * **Re-Running the Tool With the Same Input & Output Produces Duplicate .html message entries:** If you run the tool on the same input folder/data AND use the same output folder, your .html files will contain duplicate message entries. Just something to be aware of. I'll improve this eventually.
 * **Folder "Browse" Buttons Not Visible On App Open On MacOS:** If you don't see the "Browse" button to select input and output folders on MacOS after running the app, resize the window until the buttons appear.
 
